@@ -2,20 +2,24 @@ package br.edu.ifspcjo.ads.dw2s6.assistencia.domain.model;
 
 
 
+import java.time.LocalDate;
 import java.util.Objects;
+
+import org.hibernate.validator.constraints.br.CPF;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-
-
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "cliente")
@@ -24,10 +28,22 @@ public class Cliente {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@NotNull
+	@Size(min = 3, max = 50)
 	private String name;
+	@NotNull
+	@Email
 	private String email;
+	@NotNull
+	@CPF
+	@Size(min = 11, max = 11)
 	private String cpf;
+	@NotNull
 	private Boolean ativo;
+	@NotNull
+	@Embedded
+	private Endereco endereco;
+	
 	
 	
 	
@@ -79,5 +95,24 @@ public class Cliente {
 		return Objects.equals(id, other.id);
 	
 	}
+	
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
+
+
+
+
+
+	
+
+
+  
